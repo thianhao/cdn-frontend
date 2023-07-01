@@ -13,7 +13,7 @@ export class UserApiService {
   private baseUrl = environment.backendApiUrl + '/user';
   private userSubject = new BehaviorSubject<User[]>([
     {
-      id: 0,
+      id: -1,
       username: '',
       email: '',
       phone: '',
