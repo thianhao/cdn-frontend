@@ -17,7 +17,6 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AddUserDialogComponent } from './pages/add-user-dialog/add-user-dialog.component';
-import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-user-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -27,8 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     UserTableComponent,
-    AddUserDialogComponent,
-    RemoveUserDialogComponent
+    AddUserDialogComponent
   ],
   imports: [
     BrowserModule,
