@@ -1,30 +1,38 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { UserTableDataSource, UserTableItem } from './user-table-datasource';
+import { UserTableDataSource } from './user-table-datasource';
+import { User } from 'src/app/models/users';
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss']
 })
-export class UserTableComponent implements AfterViewInit {
+export class UserTableComponent implements AfterViewChecked {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<UserTableItem>;
-  dataSource: UserTableDataSource;
+  @ViewChild(MatTable) table!: MatTable<User>;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  private userList: User[] = [];
+  public dataSource!: UserTableDataSource;
+  public displayedColumns = ['id', 'username', 'email', 'phone', 'skillsets', 'hobby', 'action'];
 
-  constructor() {
-    this.dataSource = new UserTableDataSource();
+  @Input()
+  public set UserData(userData: User[]) {
+    this.userList = userData;
+    this.dataSource = new UserTableDataSource(this.userList);
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  constructor() {
+  }
+
+  ngAfterViewChecked(): void {
+    if(this.userList.some(u => u.id !== -1)) {
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.table.dataSource = this.dataSource;
+    }
   }
 }
