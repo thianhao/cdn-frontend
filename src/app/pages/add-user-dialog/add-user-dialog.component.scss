@@ -12,6 +12,11 @@
     justify-content: space-between;
 }
 
+.input-error {
+    display: flex;
+    flex-direction: column;
+}
+
 mat-dialog-content {
     padding: 20px;
     width: 400px;

@@ -10,33 +10,48 @@ import { User } from 'src/app/models/users';
 })
 export class AddUserDialogComponent implements OnInit, OnDestroy {
   public addUserForm!: FormGroup;
+  public label = 'Create User'
+  public title = 'Add New Freelancer Details';
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddUserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User
+    @Inject(MAT_DIALOG_DATA) public data: UserDialogData
   ) {
+    if(data.action == 'Update') {
+      this.label = 'Update User';
+      this.title = `Update details for ${this.data.user.username}`;
+    }
   }
 
   ngOnInit(): void {
+    const user = this.data.user;
     this.addUserForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-      skillsets: ['', [Validators.required]],
-      hobby: ['', [Validators.required]]
+      username: [user.username, [Validators.required, Validators.minLength(5)]],
+      email: [user.email, [Validators.required, Validators.email]],
+      phone: [user.phone, [Validators.required]],
+      skillsets: [user.skillsets, [Validators.required]],
+      hobby: [user.hobby, [Validators.required]]
     });
   }
 
   ngOnDestroy(): void {
-    this.data.username = this.addUserForm.value.username as string;
-    this.data.email = this.addUserForm.value.email as string;
-    this.data.phone = this.addUserForm.value.phone as string;
+    const invalid = this.addUserForm.get('email')?.invalid;
+    this.data.user.username = this.addUserForm.value.username as string;
+    this.data.user.email = this.addUserForm.value.email as string;
+    this.data.user.phone = this.addUserForm.value.phone as string;
     this.dialogRef.close(this.data);
     // this.data.skillsets = this.addUserForm.value.skillsets as string;
     // this.data.hobby = this.addUserForm.value.hobby as string;
-
   }
 
+  public Cancel(): void {
+    this.data.action = 'Cancel';
+    this.dialogRef.close();
+  }
+}
 
+export interface UserDialogData {
+  user: User;
+  action: string;
 }
