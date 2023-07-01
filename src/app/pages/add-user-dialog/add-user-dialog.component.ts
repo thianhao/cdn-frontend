@@ -12,6 +12,8 @@ export class AddUserDialogComponent implements OnInit, OnDestroy {
   public addUserForm!: FormGroup;
   public label = 'Create User'
   public title = 'Add New Freelancer Details';
+  public skillsets! : string[];
+  public hobby! : string[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,6 +23,8 @@ export class AddUserDialogComponent implements OnInit, OnDestroy {
     if(data.action == 'Update') {
       this.label = 'Update User';
       this.title = `Update details for ${this.data.user.username}`;
+      this.skillsets = data.user.skillsets;
+      this.hobby = data.user.hobby;
     }
   }
 

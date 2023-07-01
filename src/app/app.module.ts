@@ -14,11 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AddUserDialogComponent } from './pages/add-user-dialog/add-user-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-user-dialog.component';
+import { MultiInputComponent } from './pages/add-user-dialog/component/multi-input/multi-input.component';
 
 
 
@@ -28,7 +30,8 @@ import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-use
     HomeComponent,
     UserTableComponent,
     AddUserDialogComponent,
-    RemoveUserDialogComponent
+    RemoveUserDialogComponent,
+    MultiInputComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-use
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatChipsModule,
     MatInputModule,
     HttpClientModule,
     CommonModule,
