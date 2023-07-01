@@ -6,7 +6,7 @@ import { UserTableDataSource } from './user-table-datasource';
 import { User } from 'src/app/models/users';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { AddUserDialogComponent } from 'src/app/pages/add-user-dialog/add-user-dialog.component';
+import { AddUserDialogComponent, UserDialogData } from 'src/app/pages/add-user-dialog/add-user-dialog.component';
 import { UserApiService } from 'src/app/services/user-api.service';
 import { RemoveUserDialogComponent } from 'src/app/pages/remove-user-dialog/remove-user-dialog.component';
 
@@ -69,11 +69,35 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
     })
   }
 
+  public OpenUpdateDialog(user: User): void {
+    const dialogData: UserDialogData = {
+      user: user,
+      action: 'Update'
+    }
+    const dialogRef = this.dialog.open(AddUserDialogComponent, {
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
+      if(data.action !== 'Cancel') {
+        this.UpdateUserDetails(data.user);
+      }
+    });
+  }
+
+  public UpdateUserDetails(data: User): void {
+    this.userApiService.UpdateUserDetails(data).pipe(takeUntil(this.unsubscribe)).subscribe({
+      next: (n) => this.GetLatestUser(),
+      error: (e) => console.log(e)
+    });
+  }
+
   public GetLatestUser(): void {
     this.userApiService.GetAllUser().pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (u) => {
         this.userApiService.UpdateUser(u);
-      }
+      },
+      error: (e) => console.log(e)
     });
   }
 }
