@@ -1,23 +1,30 @@
-import { AfterViewChecked, AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { UserTableDataSource } from './user-table-datasource';
 import { User } from 'src/app/models/users';
+import { MatDialog } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
+import { AddUserDialogComponent } from 'src/app/pages/add-user-dialog/add-user-dialog.component';
+import { UserApiService } from 'src/app/services/user-api.service';
+import { RemoveUserDialogComponent } from 'src/app/pages/remove-user-dialog/remove-user-dialog.component';
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.scss']
 })
-export class UserTableComponent implements AfterViewChecked {
+export class UserTableComponent implements AfterViewChecked, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<User>;
 
-  private userList: User[] = [];
   public dataSource!: UserTableDataSource;
   public displayedColumns = ['id', 'username', 'email', 'phone', 'skillsets', 'hobby', 'action'];
+  private userList: User[] = [];
+  private unsubscribe = new Subject<void>();
+
 
   @Input()
   public set UserData(userData: User[]) {
@@ -25,7 +32,14 @@ export class UserTableComponent implements AfterViewChecked {
     this.dataSource = new UserTableDataSource(this.userList);
   }
 
-  constructor() {
+  constructor(
+    private userApiService: UserApiService,
+    private dialog: MatDialog
+  ) {
+  }
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   ngAfterViewChecked(): void {
@@ -34,5 +48,32 @@ export class UserTableComponent implements AfterViewChecked {
       this.dataSource.paginator = this.paginator;
       this.table.dataSource = this.dataSource;
     }
+  }
+
+  public OpenDeleteUserDialog(user: User): void {
+    const dialogRef = this.dialog.open(RemoveUserDialogComponent, {
+      data: user
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
+      if(data) {
+        this.DeleteUser(user.id);
+      }
+    });
+  }
+
+  public DeleteUser(id: number): void {
+    this.userApiService.DeleteUser(id).pipe(takeUntil(this.unsubscribe)).subscribe({
+      next: (n) => this.GetLatestUser(),
+      error: (e) => console.log(e)
+    })
+  }
+
+  public GetLatestUser(): void {
+    this.userApiService.GetAllUser().pipe(takeUntil(this.unsubscribe)).subscribe({
+      next: (u) => {
+        this.userApiService.UpdateUser(u);
+      }
+    });
   }
 }

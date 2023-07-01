@@ -49,7 +49,7 @@ export class UserApiService {
     return this.http.patch(this.baseUrl + '/' + id, user);
   }
 
-  public DeleteUser(id: string): Observable<unknown> {
+  public DeleteUser(id: number): Observable<unknown> {
     return this.http.delete(this.baseUrl + '/' + id);
   }
 

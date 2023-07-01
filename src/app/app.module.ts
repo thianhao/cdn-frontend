@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AddUserDialogComponent } from './pages/add-user-dialog/add-user-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-user-dialog.component';
 
 
 
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     UserTableComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent,
+    RemoveUserDialogComponent
   ],
   imports: [
     BrowserModule,
