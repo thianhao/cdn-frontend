@@ -11,8 +11,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { AddUserDialogComponent } from './pages/add-user-dialog/add-user-dialog.component';
+import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-user-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,7 +26,9 @@ import { CommonModule } from '@angular/common';
   declarations: [
     AppComponent,
     HomeComponent,
-    UserTableComponent
+    UserTableComponent,
+    AddUserDialogComponent,
+    RemoveUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +39,12 @@ import { CommonModule } from '@angular/common';
     MatSortModule,
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
     HttpClientModule,
     CommonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

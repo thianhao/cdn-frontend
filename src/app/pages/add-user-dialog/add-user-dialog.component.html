@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Add New Freelancer Details</h1>
+<mat-dialog-content>
+    <form [formGroup]="addUserForm">
+        <div class="dialog-field">
+            <div class="dialog-input">
+                <label>Username</label>
+                <input matInput formControlName="username">
+            </div>
+            <div class="dialog-input">
+                <label>Email</label>
+                <input matInput type="email" formControlName="email">
+            </div>
+            <div class="dialog-input">
+                <label>Phone Number</label>
+                <input matInput formControlName="phone">
+            </div>
+            <div class="dialog-input">
+                <label>Skillsets</label>
+                <input matInput formControlName="skillsets">
+            </div>
+            <div class="dialog-input">
+                <label>Hobby</label>
+                <input matInput formControlName="hobby">
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button  mat-dialog-close cdkFocusInitial>Create User</button>
+</mat-dialog-actions>
