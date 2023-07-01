@@ -8,30 +8,40 @@
             </div>
             <div class="dialog-input">
                 <label>Email</label>
-                    <input matInput type="email" formControlName="email">
-                    <mat-error *ngIf="addUserForm.get('email')!.hasError('email') && !addUserForm.get('email')!.hasError('required')">
-                        Please enter a valid email address
-                      </mat-error>
-                      <mat-error *ngIf="addUserForm.get('email')!.hasError('required')">
-                        Email is <strong>required</strong>
-                      </mat-error>
+                <input matInput type="email" formControlName="email">
+                <mat-error
+                    *ngIf="addUserForm.get('email')!.hasError('email') && !addUserForm.get('email')!.hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="addUserForm.get('email')!.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
             </div>
             <div class="dialog-input">
                 <label>Phone Number</label>
                 <input matInput formControlName="phone">
+                <mat-error *ngIf="addUserForm.get('phone')!.hasError('required')">
+                    Phone is <strong>required</strong>
+                </mat-error>
             </div>
             <div class="dialog-input">
                 <label>Skillsets</label>
                 <input matInput formControlName="skillsets">
+                <mat-error *ngIf="addUserForm.get('skillsets')!.hasError('required')">
+                    Skillsets is <strong>required</strong>
+                </mat-error>
             </div>
             <div class="dialog-input">
                 <label>Hobby</label>
                 <input matInput formControlName="hobby">
+                <mat-error *ngIf="addUserForm.get('hobby')!.hasError('required')">
+                    Hobby is <strong>required</strong>
+                </mat-error>
             </div>
         </div>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close (click)="Cancel()">Cancel</button>
-    <button mat-button mat-dialog-close cdkFocusInitial>{{ label }}</button>
+    <button mat-button mat-dialog-close cdkFocusInitial  [disabled]="addUserForm.invalid">{{ label }}</button>
 </mat-dialog-actions>

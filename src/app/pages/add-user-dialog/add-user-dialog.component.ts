@@ -36,7 +36,6 @@ export class AddUserDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    const invalid = this.addUserForm.get('email')?.invalid;
     this.data.user.username = this.addUserForm.value.username as string;
     this.data.user.email = this.addUserForm.value.email as string;
     this.data.user.phone = this.addUserForm.value.phone as string;
