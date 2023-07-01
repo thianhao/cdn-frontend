@@ -1,7 +1,10 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/users';
 import { UserApiService } from 'src/app/services/user-api.service';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private userApiService: UserApiService,
+    private dialog: MatDialog
   ) {
    
    }
@@ -40,6 +44,23 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (u) => {
         this.userApiService.UpdateUser(u);
       }
+    });
+  }
+
+  public OpenDialog(): void {
+    const dialogRef = this.dialog.open(AddUserDialogComponent, {
+      data: {
+      id: -1,
+      username: '',
+      email: '',
+      phone: '',
+      skillsets: [],
+      hobby: []
+      }
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
+      console.log(`Dialog result: ${data}`);
     });
   }
 }
