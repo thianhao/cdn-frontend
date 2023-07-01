@@ -1,3 +1,10 @@
 .full-width-table {
   width: 100%;
 }
+
+.action-button {
+  display: flex;
+  width: 230px;
+  justify-content: space-around;
+  align-items: center;
+}
