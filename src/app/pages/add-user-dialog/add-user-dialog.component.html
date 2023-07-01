@@ -8,7 +8,6 @@
             </div>
             <div class="dialog-input">
                 <label>Email</label>
-                <div class="input-error">
                     <input matInput type="email" formControlName="email">
                     <mat-error *ngIf="addUserForm.get('email')!.hasError('email') && !addUserForm.get('email')!.hasError('required')">
                         Please enter a valid email address
@@ -16,7 +15,6 @@
                       <mat-error *ngIf="addUserForm.get('email')!.hasError('required')">
                         Email is <strong>required</strong>
                       </mat-error>
-                </div>
             </div>
             <div class="dialog-input">
                 <label>Phone Number</label>
