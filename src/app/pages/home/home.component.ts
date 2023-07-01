@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, take, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/users';
 import { UserApiService } from 'src/app/services/user-api.service';
-import { MatDialog} from '@angular/material/dialog';
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUserDialogComponent, UserDialogData } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     private userApiService: UserApiService,
     private dialog: MatDialog
   ) {
-   
-   }
+
+  }
 
   ngOnInit(): void {
     this.GetUserList();
-    
+
     this.userApiService.User$.pipe(takeUntil(this.unsubscribe)).subscribe(u => {
       this.userList = u;
     })
@@ -47,19 +47,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public OpenDialog(): void {
+    const dialogData: UserDialogData = {
+      user: {
+        id: -1,
+        username: '',
+        email: '',
+        phone: '',
+        skillsets: [],
+        hobby: []
+      },
+      action: 'Create'
+    }
     const dialogRef = this.dialog.open(AddUserDialogComponent, {
-      data: {
-      id: -1,
-      username: '',
-      email: '',
-      phone: '',
-      skillsets: [],
-      hobby: []
-      } as User
+      data: dialogData
     });
 
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
-      if(data.action !== 'Cancel') {
+      if (data.action !== 'Cancel') {
         this.AddUser(data);
       }
     });
@@ -71,5 +75,5 @@ export class HomeComponent implements OnInit, OnDestroy {
       error: (e) => console.log(e)
     });
   }
-  
+
 }
