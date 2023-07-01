@@ -5,6 +5,12 @@
             <div class="dialog-input">
                 <label>Username</label>
                 <input matInput formControlName="username">
+                <mat-error *ngIf="addUserForm.get('username')!.hasError('required')">
+                    Username is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="addUserForm.get('username')!.hasError('minlength') && !addUserForm.get('username')!.hasError('required')">
+                    Username must be longer than <strong>5</strong>
+                </mat-error>
             </div>
             <div class="dialog-input">
                 <label>Email</label>
