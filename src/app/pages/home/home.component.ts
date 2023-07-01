@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
       if (data.action !== 'Cancel') {
-        this.AddUser(data);
+        this.AddUser(data.user);
       }
     });
   }
