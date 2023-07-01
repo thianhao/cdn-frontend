@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/users';
 import { UserApiService } from 'src/app/services/user-api.service';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
-import { DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-home',
@@ -56,11 +55,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       phone: '',
       skillsets: [],
       hobby: []
-      }
+      } as User
     });
 
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
-      console.log(`Dialog result: ${data}`);
+      this.AddUser(data);
     });
   }
+
+  public AddUser(data: User): void {
+    this.userApiService.AddUser(data).pipe(takeUntil(this.unsubscribe)).subscribe({
+      next: () => this.GetUserList(),
+      error: (e) => console.log(e)
+    });
+  }
+  
 }
