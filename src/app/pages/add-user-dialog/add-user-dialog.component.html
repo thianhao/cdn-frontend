@@ -2,19 +2,20 @@
 <mat-dialog-content>
     <form [formGroup]="addUserForm">
         <div class="dialog-field">
-            <div class="dialog-input">
-                <label>Username</label>
+            <mat-form-field class="form-field">
+                <mat-label>Username</mat-label>
                 <input matInput formControlName="username">
                 <mat-error *ngIf="addUserForm.get('username')!.hasError('required')">
                     Username is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="addUserForm.get('username')!.hasError('minlength') && !addUserForm.get('username')!.hasError('required')">
+                <mat-error
+                    *ngIf="addUserForm.get('username')!.hasError('minlength') && !addUserForm.get('username')!.hasError('required')">
                     Username must be longer than <strong>5</strong>
                 </mat-error>
-            </div>
-            <div class="dialog-input">
-                <label>Email</label>
-                <input matInput type="email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
                 <mat-error
                     *ngIf="addUserForm.get('email')!.hasError('email') && !addUserForm.get('email')!.hasError('required')">
                     Please enter a valid email address
@@ -22,32 +23,32 @@
                 <mat-error *ngIf="addUserForm.get('email')!.hasError('required')">
                     Email is <strong>required</strong>
                 </mat-error>
-            </div>
-            <div class="dialog-input">
-                <label>Phone Number</label>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>Phone Number</mat-label>
                 <input matInput formControlName="phone">
                 <mat-error *ngIf="addUserForm.get('phone')!.hasError('required')">
                     Phone is <strong>required</strong>
                 </mat-error>
-            </div>
-            <div class="dialog-input">
-                <label>Skillsets</label>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>Skillsets</mat-label>
                 <input matInput formControlName="skillsets">
                 <mat-error *ngIf="addUserForm.get('skillsets')!.hasError('required')">
                     Skillsets is <strong>required</strong>
                 </mat-error>
-            </div>
-            <div class="dialog-input">
-                <label>Hobby</label>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-label>Hobby</mat-label>
                 <input matInput formControlName="hobby">
                 <mat-error *ngIf="addUserForm.get('hobby')!.hasError('required')">
                     Hobby is <strong>required</strong>
                 </mat-error>
-            </div>
+            </mat-form-field>
         </div>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close (click)="Cancel()">Cancel</button>
-    <button mat-button mat-dialog-close cdkFocusInitial  [disabled]="addUserForm.invalid">{{ label }}</button>
+    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="addUserForm.invalid">{{ label }}</button>
 </mat-dialog-actions>

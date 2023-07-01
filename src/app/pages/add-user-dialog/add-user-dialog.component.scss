@@ -6,18 +6,10 @@
     width: 500px;
     height: 500px;
 }
-
-.dialog-input {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
 mat-dialog-content {
     padding: 20px;
 }
 
-input {
-    height: 30px;
+.form-field {
+    width: 500px;
 }
