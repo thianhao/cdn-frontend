@@ -9,6 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AddUserDialogComponent, UserDialogData } from 'src/app/pages/add-user-dialog/add-user-dialog.component';
 import { UserApiService } from 'src/app/services/user-api.service';
 import { RemoveUserDialogComponent } from 'src/app/pages/remove-user-dialog/remove-user-dialog.component';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-user-table',
@@ -34,7 +35,8 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
 
   constructor(
     private userApiService: UserApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {
   }
   ngOnDestroy(): void {
@@ -65,7 +67,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
   public DeleteUser(id: number): void {
     this.userApiService.DeleteUser(id).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (n) => this.GetLatestUser(),
-      error: (e) => console.log(e)
+      error: (e) => this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
     })
   }
 
@@ -88,7 +90,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
   public UpdateUserDetails(data: User): void {
     this.userApiService.UpdateUserDetails(data).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (n) => this.GetLatestUser(),
-      error: (e) => console.log(e)
+      error: (e) =>  this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
     });
   }
 
@@ -97,7 +99,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
       next: (u) => {
         this.userApiService.UpdateUser(u);
       },
-      error: (e) => console.log(e)
+      error: (e) =>  this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
     });
   }
 }

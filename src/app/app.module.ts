@@ -21,6 +21,7 @@ import { AddUserDialogComponent } from './pages/add-user-dialog/add-user-dialog.
 import { ReactiveFormsModule } from '@angular/forms';
 import { RemoveUserDialogComponent } from './pages/remove-user-dialog/remove-user-dialog.component';
 import { MultiInputComponent } from './pages/add-user-dialog/component/multi-input/multi-input.component';
+import { MessageDialogComponent } from './pages/message-dialog/message-dialog.component';
 
 
 
@@ -31,7 +32,8 @@ import { MultiInputComponent } from './pages/add-user-dialog/component/multi-inp
     UserTableComponent,
     AddUserDialogComponent,
     RemoveUserDialogComponent,
-    MultiInputComponent
+    MultiInputComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,

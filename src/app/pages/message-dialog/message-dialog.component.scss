@@ -1,0 +1,24 @@
+.title {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+mat-dialog-content{
+    width: 400px;
+}
+
+span {
+    font-size: larger;
+}
+
+mat-icon {
+    font-size: 48px;
+    width: fit-content;
+    height: fit-content;
+}
+
+button {
+    font-size: larger;
+}
+

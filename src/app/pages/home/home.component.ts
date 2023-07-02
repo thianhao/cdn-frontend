@@ -4,6 +4,7 @@ import { User } from 'src/app/models/users';
 import { UserApiService } from 'src/app/services/user-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserDialogComponent, UserDialogData } from '../add-user-dialog/add-user-dialog.component';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private userApiService: UserApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {
 
   }
@@ -72,7 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public AddUser(data: User): void {
     this.userApiService.AddUser(data).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: () => this.GetUserList(),
-      error: (e) => console.log(e)
+      error: (e) => this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
     });
   }
 
