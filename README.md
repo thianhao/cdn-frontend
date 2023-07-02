@@ -1,10 +1,20 @@
 # CdnFrontend
 
+A simple frontend application for Company Developer Network Freelancer Management System built using Angular 15.2.8.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.8.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Install dependencies: `npm install`
+2. Start the project:  `npm start`
+3. Access the project at `http://localhost:4200/home`
+
+## Usage
+
+1. The project supports CRUD operation on Freelancer Record.
+2. At home page, register new freelancer record by clicking button 'Add New Freelancer'
+3. View all registered freelancer with the table.
+4. Update or delete freelancer by clicking action buttons at each row of records.
 
 ## Code scaffolding
 
