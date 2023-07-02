@@ -36,7 +36,7 @@ export class AddUserDialogComponent implements OnInit {
     this.addUserForm = this.formBuilder.group({
       username: [user.username, [Validators.required, Validators.minLength(5)]],
       email: [user.email, [Validators.required, Validators.email]],
-      phone: [user.phone, [Validators.required]],
+      phone: [user.phone, [Validators.required, phoneNumberValidator]],
       skillsets: [user.skillsets, [Validators.required]],
       hobby: [user.hobby, [Validators.required]]
     });
@@ -68,10 +68,21 @@ export class AddUserDialogComponent implements OnInit {
   public Cancel(): void {
     this.dialogRef.close();
   }
-
+  
 }
 
 export interface UserDialogData {
   user: User;
   action: string;
+}
+
+
+export function phoneNumberValidator(control: FormControl) {
+  const phoneNumberRegex = /^\+[1-9]{1}[0-9]{3,14}$/; 
+
+  if (control.value && !phoneNumberRegex.test(control.value)) {
+    return { invalidPhoneNumber: true };
+  }
+
+  return null;
 }
