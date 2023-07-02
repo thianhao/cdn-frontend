@@ -72,8 +72,8 @@ export class AddUserDialogComponent implements OnInit {
 
   public CheckValid(): boolean {
     if (this.addUserForm.invalid) {
-      const hobbyHasItems = this.skillsets !== undefined;
-      const skillHasItems = this.hobby !== undefined;
+      const hobbyHasItems = this.skillsets !== undefined && this.skillsets.length > 0;
+      const skillHasItems = this.hobby !== undefined && this.hobby.length > 0;
       if (hobbyHasItems && skillHasItems) {
         return false;
       }
