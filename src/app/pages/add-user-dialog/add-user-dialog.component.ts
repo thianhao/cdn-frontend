@@ -42,8 +42,9 @@ export class AddUserDialogComponent implements OnInit {
     });
 
     this.skillSetsControl  = this.addUserForm.controls['skillsets'] as FormControl;
+    this.skillSetsControl.setValue([]);
     this.hobbyControl  = this.addUserForm.controls['hobby'] as FormControl;
-
+    this.hobbyControl.setValue([]);
   }
 
   public UpdateSkillsets(skillsets: string[]): void {
