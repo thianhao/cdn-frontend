@@ -31,7 +31,7 @@
                     Phone is <strong>required</strong>
                 </mat-error>
                 <mat-error *ngIf="addUserForm.get('phone')!.hasError('invalidPhoneNumber')">
-                    Please insert a phone number with a country code (e.g., +60165010101)
+                    Please insert a valid phone number with country code (e.g., +60165010101)
                 </mat-error>
             </mat-form-field>
             <app-multi-input class="form-field" [Title]="'Skillsets'" [Items]="skillsets" [control]="skillSetsControl"
