@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Form, FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -31,10 +31,17 @@ export class MultiInputComponent {
     this.formControl = data;
   }
 
+  @Input() 
+  public control!: FormControl;
+
+  @Output() 
+  public itemsChange: EventEmitter<string[]> = new EventEmitter<string[]>();
+
   removeKeyword(item: string) {
     const index = this.items.indexOf(item);
     if (index >= 0) {
       this.items.splice(index, 1);
+      this.itemsChange.emit(this.items);
     }
   }
 
@@ -48,6 +55,7 @@ export class MultiInputComponent {
       }
       
       this.items.push(value);
+      this.itemsChange.emit(this.items);
     }
 
     // Clear the input value

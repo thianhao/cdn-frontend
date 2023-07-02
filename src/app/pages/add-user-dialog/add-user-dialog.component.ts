@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/users';
 
 @Component({
@@ -8,12 +8,15 @@ import { User } from 'src/app/models/users';
   templateUrl: './add-user-dialog.component.html',
   styleUrls: ['./add-user-dialog.component.scss']
 })
-export class AddUserDialogComponent implements OnInit, OnDestroy {
+export class AddUserDialogComponent implements OnInit {
   public addUserForm!: FormGroup;
   public label = 'Create User'
   public title = 'Add New Freelancer Details';
   public skillsets! : string[];
   public hobby! : string[];
+  public skillSetsControl!: FormControl<any>;
+  public hobbyControl!: FormControl<any>;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,21 +40,35 @@ export class AddUserDialogComponent implements OnInit, OnDestroy {
       skillsets: [user.skillsets, [Validators.required]],
       hobby: [user.hobby, [Validators.required]]
     });
+
+    this.skillSetsControl  = this.addUserForm.controls['skillsets'] as FormControl;
+    this.hobbyControl  = this.addUserForm.controls['hobby'] as FormControl;
+
   }
 
-  ngOnDestroy(): void {
+  public UpdateSkillsets(skillsets: string[]): void {
+    this.skillsets = skillsets;
+    this.addUserForm.get('skillsets')!.setValue(skillsets);
+  }
+
+  public UpdateHobby(hobby: string[]): void {
+    this.hobby = hobby;
+    this.addUserForm.get('hobby')!.setValue(hobby);
+  }
+
+  public Confirm(): void {
     this.data.user.username = this.addUserForm.value.username as string;
     this.data.user.email = this.addUserForm.value.email as string;
     this.data.user.phone = this.addUserForm.value.phone as string;
+    this.data.user.skillsets = this.addUserForm.value.skillsets;
+    this.data.user.hobby = this.addUserForm.value.hobby;
     this.dialogRef.close(this.data);
-    // this.data.skillsets = this.addUserForm.value.skillsets as string;
-    // this.data.hobby = this.addUserForm.value.hobby as string;
   }
 
   public Cancel(): void {
-    this.data.action = 'Cancel';
     this.dialogRef.close();
   }
+
 }
 
 export interface UserDialogData {

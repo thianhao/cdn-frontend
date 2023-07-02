@@ -31,25 +31,14 @@
                     Phone is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
-            <app-multi-input class="form-field" [Title]="'Skillsets'" [Items]="skillsets"></app-multi-input>
-            <!-- <mat-form-field class="form-field">
-                <mat-label>Skillsets</mat-label>
-                <input matInput formControlName="skillsets">
-                <mat-error *ngIf="addUserForm.get('skillsets')!.hasError('required')">
-                    Skillsets is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="form-field">
-                <mat-label>Hobby</mat-label>
-                <input matInput formControlName="hobby">
-                <mat-error *ngIf="addUserForm.get('hobby')!.hasError('required')">
-                    Hobby is <strong>required</strong>
-                </mat-error>
-            </mat-form-field> -->
+            <app-multi-input class="form-field" [Title]="'Skillsets'" [Items]="skillsets" [control]="skillSetsControl"
+                (itemsChange)="UpdateSkillsets($event)"></app-multi-input>
+                <app-multi-input class="form-field" [Title]="'Hobby'" [Items]="hobby" [control]="hobbyControl"
+                (itemsChange)="UpdateHobby($event)"></app-multi-input>
         </div>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close (click)="Cancel()">Cancel</button>
-    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="addUserForm.invalid">{{ label }}</button>
+    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="addUserForm.invalid" (click)="Confirm()">{{ label }}</button>
 </mat-dialog-actions>
