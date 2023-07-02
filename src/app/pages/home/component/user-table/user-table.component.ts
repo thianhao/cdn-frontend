@@ -79,7 +79,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
     });
 
     dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe)).subscribe(data => {
-      if(data.action !== 'Cancel') {
+      if(data) {
         this.UpdateUserDetails(data.user);
       }
     });
