@@ -67,7 +67,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
   public DeleteUser(id: number): void {
     this.userApiService.DeleteUser(id).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (n) => this.GetLatestUser(),
-      error: (e) => this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
+      error: (e) => this.dialogService.OpenMessageDialog(e.error.statusCode, e.error.message)
     })
   }
 
@@ -90,7 +90,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
   public UpdateUserDetails(data: User): void {
     this.userApiService.UpdateUserDetails(data).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (n) => this.GetLatestUser(),
-      error: (e) =>  this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
+      error: (e) =>  this.dialogService.OpenMessageDialog(e.error.statusCode, e.error.message)
     });
   }
 
@@ -99,7 +99,7 @@ export class UserTableComponent implements AfterViewChecked, OnDestroy {
       next: (u) => {
         this.userApiService.UpdateUser(u);
       },
-      error: (e) =>  this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
+      error: (e) =>  this.dialogService.OpenMessageDialog(e.error.statusCode, e.error.message)
     });
   }
 }

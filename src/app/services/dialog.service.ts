@@ -11,7 +11,8 @@ export class DialogService {
     ) {
     }
 
-    public OpenMessageDialog(title: string, message: string,) {
+    public OpenMessageDialog(code: string, message: string,) {
+        const title = 'HTTP ERROR ' + code;
         this.dialog.open(MessageDialogComponent, {
             data: {
                 title,

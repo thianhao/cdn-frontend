@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public AddUser(data: User): void {
     this.userApiService.AddUser(data).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: () => this.GetUserList(),
-      error: (e) => this.dialogService.OpenMessageDialog('HTTP ERROR', e.error.message)
+      error: (e) => this.dialogService.OpenMessageDialog(e.error.statusCode, e.error.message)
     });
   }
 
