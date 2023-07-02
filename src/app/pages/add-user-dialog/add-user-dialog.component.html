@@ -43,5 +43,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close (click)="Cancel()">Cancel</button>
-    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="addUserForm.invalid" (click)="Confirm()">{{ label }}</button>
+    <button mat-button mat-dialog-close cdkFocusInitial [disabled]="CheckValid()" (click)="Confirm()">{{ label }}</button>
 </mat-dialog-actions>

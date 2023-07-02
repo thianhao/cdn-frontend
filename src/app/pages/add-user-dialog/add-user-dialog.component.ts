@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { User } from 'src/app/models/users';
 
 @Component({
@@ -69,7 +69,19 @@ export class AddUserDialogComponent implements OnInit {
   public Cancel(): void {
     this.dialogRef.close();
   }
-  
+
+  public CheckValid(): boolean {
+    if (this.addUserForm.invalid) {
+      const hobbyHasItems = this.skillsets !== undefined;
+      const skillHasItems = this.hobby !== undefined;
+      if (hobbyHasItems && skillHasItems) {
+        return false;
+      }
+      return true;
+    }
+   
+    return false;
+  }
 }
 
 export interface UserDialogData {
