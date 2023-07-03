@@ -1,6 +1,6 @@
 # CdnFrontend
 
-A simple frontend application for Company Developer Network Freelancer Management System built using Angular 15.2.8.
+A simple frontend application for Company Developer Network Freelancer Management System built using Angular 15.2.8 and Node v16.14.2.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.8.
 
 ## Installation
