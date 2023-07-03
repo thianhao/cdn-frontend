@@ -10,6 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 3. Access the project at `http://localhost:4200/home`
 
 ## Usage
+![image](https://github.com/thianhao/cdn-frontend/assets/56263777/ca7320e3-f6ee-43bf-8726-c389d511168d)
 
 1. The project supports CRUD operation on Freelancer Record.
 2. At home page, register new freelancer record by clicking button 'Add New Freelancer'
@@ -35,3 +36,4 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To get more information and clarification please contact owner at thianhao0312@gmail.com.
